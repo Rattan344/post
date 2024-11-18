@@ -2,14 +2,12 @@ const postsContainer = document.getElementById('posts');
 const loader = document.getElementById('loader');
 let page = 1;
 
-// Fetch posts from a placeholder API
 async function fetchPosts() {
     const res = await fetch(`https://jsonplaceholder.typicode.com/posts?_page=${page}&_limit=5`);
     const data = await res.json();
     return data;
 }
 
-// Display posts in the HTML
 function displayPosts(posts) {
     posts.forEach(post => {
         const postDiv = document.createElement('div');
@@ -22,7 +20,6 @@ function displayPosts(posts) {
     });
 }
 
-// Load initial posts and hide loader
 async function loadPosts() {
     loader.classList.add('show');
     const posts = await fetchPosts();
@@ -31,7 +28,6 @@ async function loadPosts() {
     page++;
 }
 
-// Infinite scrolling logic
 window.addEventListener('scroll', () => {
     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 
@@ -40,5 +36,4 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Initial load
 loadPosts();
